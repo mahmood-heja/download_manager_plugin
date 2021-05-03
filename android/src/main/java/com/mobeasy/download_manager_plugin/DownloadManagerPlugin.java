@@ -70,28 +70,28 @@ public class DownloadManagerPlugin implements FlutterPlugin, MethodChannel.Metho
     Log.e("Path:" , file.getPath()+ "\n" +"Mime Type :" +mimeString);
 
     DownloadManager.Request request ;
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
 
       request=new DownloadManager.Request(Uri.parse(url))
               .setTitle(name)
               .setDescription("Downloading")
-              .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+              .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
               .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,name)
               .setRequiresCharging(false)
               .setAllowedOverMetered(true)
               .setMimeType(mime)
               .setAllowedOverRoaming(false);
-    }
-    else{
-      request=new DownloadManager.Request(Uri.parse(url))
-              .setTitle(name)
-              .setDescription("Downloading")
-              .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-              .setDestinationUri(Uri.fromFile(file) )
-              .setMimeType(mimeString)
-              .setAllowedOverRoaming(false);
-    }
+//    }
+//    else{
+//      request=new DownloadManager.Request(Uri.parse(url))
+//              .setTitle(name)
+//              .setDescription("Downloading")
+//              .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+//              .setDestinationUri(Uri.fromFile(file) )
+//              .setMimeType(mimeString)
+//              .setAllowedOverRoaming(false);
+//    }
 
     DownloadManager downloadManager=(DownloadManager)context.getSystemService(DOWNLOAD_SERVICE);
     downloadID=downloadManager.enqueue(request);
