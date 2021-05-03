@@ -40,7 +40,7 @@ public class DownloadManagerPlugin implements FlutterPlugin, MethodChannel.Metho
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "download_manager_plugin");
     channel.setMethodCallHandler(this);
-     context = flutterPluginBinding.getApplicationContext() ;
+    context = flutterPluginBinding.getApplicationContext() ;
     context.registerReceiver(onDownloadComplete , new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) ;
 
 
@@ -55,6 +55,10 @@ public class DownloadManagerPlugin implements FlutterPlugin, MethodChannel.Metho
     // Toast.makeText(this, map.get("name"), Toast.LENGTH_SHORT).show();
     if(call.method.equals("downloadManager")) {
       beginDownload(map.get("url") , map.get("name") , map.get("mime"));
+    }else if (call.method.equals("getVersion")) {
+      result.success(android.os.Build.VERSION.RELEASE);
+    } else {
+      result.notImplemented();
     }
 
   }
@@ -73,15 +77,14 @@ public class DownloadManagerPlugin implements FlutterPlugin, MethodChannel.Metho
 //    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
 
-      request=new DownloadManager.Request(Uri.parse(url))
-              .setTitle(name)
-              .setDescription("Downloading")
-              .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-              .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,name)
-              .setRequiresCharging(false)
-              .setAllowedOverMetered(true)
-              .setMimeType(mime)
-              .setAllowedOverRoaming(false);
+    request=new DownloadManager.Request(Uri.parse(url))
+            .setTitle(name)
+            .setDescription("Downloading")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,name)
+            .setAllowedOverMetered(true)
+            .setMimeType(mime)
+            .setAllowedOverRoaming(false);
 //    }
 //    else{
 //      request=new DownloadManager.Request(Uri.parse(url))
