@@ -17,7 +17,7 @@ class DownloadManagerPlugin {
     );
   }
 
-  static Future<String> get getVersion async {
+  static Future<String> get getAndroidDeviceVersion async {
     final String version = await _channel.invokeMethod('getVersion');
     return version;
   }
