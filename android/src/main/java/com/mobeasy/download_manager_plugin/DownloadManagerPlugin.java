@@ -80,7 +80,7 @@ public class DownloadManagerPlugin implements FlutterPlugin, MethodChannel.Metho
     request=new DownloadManager.Request(Uri.parse(url))
             .setTitle(name)
             .setDescription("Downloading")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,name)
             .setAllowedOverMetered(true)
             .setMimeType(mime)
